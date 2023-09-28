@@ -44,7 +44,7 @@ def fake_posts(num):
         category = Category.objects.get(id=category_id)
         tag_id = random.randint(1, 500)
         tag = Tag.objects.get(id=tag_id)
-        status = fake.random_choices(elements=("DF", "PB"))
+        status = fake.random_choices(elements=("DF", "PB"), length=1)
         published = fake.unique.past_datetime()
         created = fake.unique.past_datetime()
         updated = fake.unique.past_datetime()

@@ -3,9 +3,14 @@ from django.utils import timezone
 from django.conf import settings
 from django.urls import reverse
 from taggit.managers import TaggableManager
-from mdeditor.fields import MDTextField
+from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.text import slugify
+
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 
 
 class Post(models.Model):
@@ -17,7 +22,7 @@ class Post(models.Model):
     slug = models.SlugField(
         max_length=250, unique_for_date="publish", allow_unicode=True
     )
-    body = MDTextField(verbose_name="Body")
+    body = RichTextField(verbose_name="Body")
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name="author",
@@ -36,6 +41,9 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    objects = models.Manager()
+    published = PublishedManager()
+
     class Meta:
         verbose_name = "Post"
         verbose_name_plural = "Posts"
@@ -51,6 +59,12 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse(
+            "post:post_detail",
+            args=[self.publish.year, self.publish.month, self.publish.day, self.slug],
+        )
 
 
 class Category(MPTTModel):

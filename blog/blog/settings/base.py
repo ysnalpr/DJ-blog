@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "post.apps.PostConfig",
-    "mdeditor",
+    "ckeditor",
+    "ckeditor_uploader",
     "taggit",
 ]
 
@@ -105,6 +106,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 MEDIA_URL = "/media/"
@@ -114,75 +116,102 @@ MEDIA_URL = "/media/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# MDeditor settings
-X_FRAME_OPTIONS = "SAMEORIGIN"
-MDEDITOR_CONFIGS = {
-    "default": {
-        "width": "100% ",  # Custom edit box width
-        "height": 500,  # Custom edit box height
-        "toolbar": [
-            "undo",
-            "redo",
-            "|",
-            "bold",
-            "del",
-            "italic",
-            "quote",
-            "ucwords",
-            "uppercase",
-            "lowercase",
-            "|",
-            "h1",
-            "h2",
-            "h3",
-            "h5",
-            "h6",
-            "|",
-            "list-ul",
-            "list-ol",
-            "hr",
-            "|",
-            "link",
-            "reference-link",
-            "image",
-            "code",
-            "preformatted-text",
-            "code-block",
-            "table",
-            "datetime",
-            "emoji",
-            "html-entities",
-            "pagebreak",
-            "goto-line",
-            "|",
-            "help",
-            "info",
-            "||",
-            "preview",
-            "watch",
-            "fullscreen",
-        ],  # custom edit box toolbar
-        "upload_image_formats": [
-            "jpg",
-            "jpeg",
-            "gif",
-            "png",
-            "bmp",
-            "webp",
-        ],  # image upload format type
-        "image_folder": "editor",  # image save the folder name
-        "theme": "default",  # edit box theme, dark / default
-        "preview_theme": "default",  # Preview area theme, dark / default
-        "editor_theme": "default",  # edit area theme, pastel-on-dark / default
-        "toolbar_autofixed": True,  # Whether the toolbar capitals
-        "search_replace": True,  # Whether to open the search for replacement
-        "emoji": True,  # whether to open the expression function
-        "tex": True,  # whether to open the tex chart function
-        "flow_chart": True,  # whether to open the flow chart function
-        "sequence": True,  # Whether to open the sequence diagram function
-        "watch": True,  # Live preview
-        "lineWrapping": False,  # lineWrapping
-        "lineNumbers": False,  # lineNumbers
-        "language": "en",  # zh / en / es
-    }
+# CKeditor settings
+CKEDITOR_UPLOAD_PATH = "uploads/editor"
+CKEDITOR_IMAGE_BACKEND = "ckeditor_uploader.backends.PillowBackend"
+CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+CKEDITOR_IMAGE_QUALITY = 40
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_ALLOW_NONIMAGE_FILES = True
+
+CUSTOM_TOOLBAR = [
+    {
+        "name": "document",
+        "items": [
+            "Styles",
+            "Format",
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strike",
+            "-",
+            "TextColor",
+            "BGColor",
+            "-",
+            "JustifyLeft",
+            "JustifyCenter",
+            "JustifyRight",
+            "JustifyBlock",
+        ],
+    },
+    {
+        "name": "widgets",
+        "items": [
+            "Undo",
+            "Redo",
+            "-",
+            "NumberedList",
+            "BulletedList",
+            "-",
+            "Outdent",
+            "Indent",
+            "-",
+            "Link",
+            "Unlink",
+            "-",
+            "Image",
+            "CodeSnippet",
+            "Table",
+            "HorizontalRule",
+            "Smiley",
+            "SpecialChar",
+            "-",
+            "Blockquote",
+            "-",
+            "ShowBlocks",
+            "Maximize",
+        ],
+    },
+]
+
+DEFAULT_CONFIG = {
+    "skin": "moono-lisa",
+    "toolbar_Basic": [["Source", "-", "Bold", "Italic"]],
+    "toolbar_Full": [
+        [
+            "Styles",
+            "Format",
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strike",
+            "SpellChecker",
+            "Undo",
+            "Redo",
+        ],
+        ["Link", "Unlink", "Anchor"],
+        ["Image", "Flash", "Table", "HorizontalRule"],
+        ["TextColor", "BGColor"],
+        ["Smiley", "SpecialChar"],
+        ["Source"],
+    ],
+    "toolbar": "Full",
+    "height": 291,
+    "width": "100%",
+    "filebrowserWindowWidth": 940,
+    "filebrowserWindowHeight": 725,
+}
+
+CKEDITOR_CONFIGS = {
+    "default": DEFAULT_CONFIG,
+    "my-custom-toolbar": {
+        "skin": "moono-lisa",
+        "toolbar": CUSTOM_TOOLBAR,
+        "toolbarGroups": None,
+        "extraPlugins": ",".join(
+            ["uploadimage", "image2", "codesnippet", "html5video", "widget"]
+        ),
+        "removePlugins": ",".join(["image"]),
+        "codeSnippet_theme": "xcode",
+    },
 }

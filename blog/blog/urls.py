@@ -21,9 +21,10 @@ from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("mdeditor/", include("mdeditor.urls")),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
+    path("blog/", include("post.urls", namespace="post")),
 ]
 
 if settings.DEBUG:
-    # static files (images, css, javascript, etc.)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
