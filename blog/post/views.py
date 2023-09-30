@@ -22,3 +22,4 @@ def post_detail(request, year, month, day, post):
 # TODO: Display categories
 # TODO: Display tags
 # TODO: Render the template based on the category slug
+# TODO: Use Postgres database

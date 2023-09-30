@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load post_tags %}
 
 {% block title %}All Posts{% endblock %}
 
@@ -22,7 +21,7 @@
                             </a>
                             <div>
                                 <span class="date">{{ post.publish|date }} | {{ post.publish|time }} &bullet; <a href="#">{{ post.category }}</a></span>
-                                <h2><a href="single.html">{{ post.title }}</a></h2>
+                                <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 {#                                <p>{{ post.body|safe|truncatewords_html:10 }}</p>#}
                                 <p><a href="{{ post.get_absolute_url }}" class="btn btn-sm btn-outline-primary">Read
                                         More</a></p>
