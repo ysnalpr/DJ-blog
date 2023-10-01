@@ -89,3 +89,6 @@ class Category(MPTTModel):
             full_path.append(k.name)
             k = k.parent
         return "->".join(full_path[::-1])
+
+    def get_absolute_url(self):
+        return reverse("post:post_list_by_category", args=[self.slug])

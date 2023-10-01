@@ -1,10 +1,16 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Count
 from .models import Post, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-def post_list(request):
+def post_list(request, category_slug=None):
+    category = None
+    categories = Category.objects.annotate(total_posts=Count("posts"))
     post_list = Post.published.all()
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        post_list = post_list.filter(category=category)
     paginator = Paginator(post_list, 3)
     page_number = request.GET.get("page", 1)
     try:
@@ -15,7 +21,11 @@ def post_list(request):
     except EmptyPage:
         # If page number is out of range return the last page.
         posts = paginator.page(paginator.num_pages)
-    return render(request, "post/list.html", {"posts": posts})
+    return render(
+        request,
+        "post/list.html",
+        {"posts": posts, "categories": categories, "category": category},
+    )
 
 
 def post_detail(request, year, month, day, post):
