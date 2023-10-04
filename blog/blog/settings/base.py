@@ -20,6 +20,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+SITE_ID = 1
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -27,12 +29,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     "post.apps.PostConfig",
     "ckeditor",
     "ckeditor_uploader",
     "taggit",
     "mptt",
     "easy_thumbnails",
+    "django_comments_xtd",
+    "django_comments",
 ]
 
 MIDDLEWARE = [
@@ -217,3 +222,10 @@ CKEDITOR_CONFIGS = {
         "codeSnippet_theme": "xcode",
     },
 }
+
+# End Ckeditor settings
+
+# Comments
+COMMENTS_APP = "django_comments_xtd"
+COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_CONFIRM_EMAIL = True
