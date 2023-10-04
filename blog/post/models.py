@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
@@ -6,6 +7,12 @@ from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.text import slugify
+
+
+def content_file_name(instance, filename):  # To change the image name
+    ext = filename.split(".")[-1]
+    filename = "%s_%s.%s" % (instance.author.id, instance.title, ext)
+    return os.path.join("posts", filename)
 
 
 class PublishedManager(models.Manager):
@@ -22,6 +29,7 @@ class Post(models.Model):
     slug = models.SlugField(
         max_length=250, unique_for_date="publish", allow_unicode=True
     )
+    image = models.ImageField(upload_to=content_file_name)
     body = RichTextField(verbose_name="Body")
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,

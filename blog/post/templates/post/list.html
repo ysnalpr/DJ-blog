@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load mptt_tags %}
+{% load thumbnail %}
 
 {% block title %}{% if category %}{{ category.name }}{% else %}All Posts{% endif %}{% endblock %}
 
@@ -20,7 +21,7 @@
                     {% for post in posts %}
                         <div class="blog-entry d-flex blog-entry-search-item">
                             <a href="{{ post.get_absolute_url }}" class="img-link me-4">
-                                <img src="{% static 'images/img_1_sq.jpg' %}" alt="{{ post.title }}" class="img-fluid" style="width: 215px; height: 215px;">
+                                <img src="{% thumbnail post.image 215x215 quality=100%}" alt="{{ post.title }}" class="img-fluid" style="width: 215px; height: 215px;">
                             </a>
                             <div>
                                 <span class="date">{{ post.publish|date }} | {{ post.publish|time }} &bullet; <a href="#">{{ post.category }}</a></span>

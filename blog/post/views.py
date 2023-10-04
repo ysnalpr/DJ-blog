@@ -29,6 +29,8 @@ def post_list(request, category_slug=None):
 
 
 def post_detail(request, year, month, day, post):
+    categories = Category.objects.annotate(total_posts=Count("posts"))
+    absolute_url = request.build_absolute_uri()
     post = get_object_or_404(
         Post,
         status=Post.Status.PUBLISHED,
@@ -37,7 +39,11 @@ def post_detail(request, year, month, day, post):
         publish__month=month,
         publish__day=day,
     )
-    return render(request, "post/detail.html", {"post": post})
+    return render(
+        request,
+        "post/detail.html",
+        {"post": post, "categories": categories, "absolute_url": absolute_url},
+    )
 
 # TODO: Display categories
 # TODO: Display tags

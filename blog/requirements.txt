@@ -7,12 +7,14 @@ django-js-asset==2.1.0
 django-mdeditor==0.1.20
 django-mptt==0.15.0
 django-taggit==4.0.0
+easy-thumbnails==2.8.5
 Faker==19.6.2
 iniconfig==2.0.0
 Markdown==3.4.1
 mypy-extensions==1.0.0
 packaging==23.1
 pathspec==0.11.2
+Pillow==10.0.1
 platformdirs==3.10.0
 pluggy==1.3.0
 psycopg2-binary==2.9.8

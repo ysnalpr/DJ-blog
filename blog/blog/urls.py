@@ -22,7 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
-    path("blog/", include("post.urls", namespace="post")),
+    path("", include("post.urls", namespace="post")),
 ]
 
 if settings.DEBUG:
