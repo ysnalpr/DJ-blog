@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+    <hr>
+    {% if form.errors %}
+        <ul>
+            {% for error in form.errors %}
+                <li class="text-danger">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="form-signin text-center col-6 mx-auto justify-content-center mb-5">
+        <form action='{% url "account:login" %}' method='post' class="my-5">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <p><input class="w-100 btn btn-lg btn-primary mt-4" type="submit" value="Login"><p>
+        </form>
+    </div>
+{% endblock %}

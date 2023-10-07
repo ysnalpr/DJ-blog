@@ -24,7 +24,7 @@
                                 <img src="{% thumbnail post.image 215x215 quality=100%}" alt="{{ post.title }}" class="img-fluid" style="width: 215px; height: 215px;">
                             </a>
                             <div>
-                                <span class="date">{{ post.publish|date }} | {{ post.publish|time }} &bullet; <a href="#">{{ post.category }}</a></span>
+                                <span class="date">{{ post.publish|date }} | {{ post.publish|time }} &bullet; <span>written by {{ post.author }}</span> | <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></span>
                                 <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
 {#                                <p>{{ post.body|safe|truncatewords_html:10 }}</p>#}
                                 <p><a href="{{ post.get_absolute_url }}" class="btn btn-sm btn-outline-primary">Read

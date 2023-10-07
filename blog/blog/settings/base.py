@@ -23,6 +23,7 @@ ALLOWED_HOSTS = []
 SITE_ID = 1
 
 INSTALLED_APPS = [
+    "account.apps.AccountConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -52,7 +53,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "blog.urls"
 
-LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "account:profile"
+LOGIN_URL = "account:login"
+LOGOUT_URL = "account:logout"
+
 
 TEMPLATES = [
     {
@@ -236,6 +240,6 @@ COMMENT_USE_EMAIL_FIRST_PART_AS_USERNAME = True
 COMMENT_USE_GRAVATAR = True
 COMMENT_ALLOW_SUBSCRIPTION = True
 
-MANAGERS = (("Yasin Alipour", "yasinalipour@example.com"),)
+ADMINS = (("Yasin Alipour", "yasinalipour@example.com"),)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 MPTT_ADMIN_LEVEL_INDENT = 20

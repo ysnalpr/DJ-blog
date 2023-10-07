@@ -5,8 +5,9 @@ from .models import Post, Category
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["title", "category", "author", "slug", "publish", "status"]
+    list_display = ["title", "category", "author", "publish", "status"]
     list_filter = ["status", "publish", "created", "author"]
+    list_editable = ["status"]
     search_fields = ["title", "body"]
     prepopulated_fields = {"slug": ("title",)}
     raw_id_fields = ["author"]

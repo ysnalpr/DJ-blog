@@ -1,5 +1,8 @@
 ## Django Blog
-[**Template**](https://themewagon.com/themes/blogy/) **used in this project**
+**Templates used in this project**
+
+[**Blog section**](https://themewagon.com/themes/blogy/)
+[**Dashboard section**](https://themewagon.com/themes/modernize/)
 
 ## How to run
 

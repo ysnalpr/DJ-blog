@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.urls import reverse
+from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
@@ -36,6 +37,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name="author",
+        related_name="articles",
         blank=False,
         null=False,
         on_delete=models.CASCADE,
