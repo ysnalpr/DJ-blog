@@ -3,22 +3,28 @@
 {% load mptt_tags %}
 {% load thumbnail %}
 
-{% block title %}{% if category %}{{ category.name }}{% else %}All Posts{% endif %}{% endblock %}
+{% block title %}Search{% endblock %}
+
 
 {% block content %}
     <div class="section search-result-wrap">
         <div class="container">
-            {% if category %}
+            {% if query %}
                 <div class="row">
                     <div class="col-12">
-                        <div class="heading">Category: {{ category.name }}</div>
+                        <div class="heading">Posts contain "{{ query }}"</div>
+                        <div class="heading">
+                            {% with results.count as total_results %}
+                                Found {{ total_results }} result{{ total_results|pluralize }}
+                            {% endwith %}
+                        </div>
                     </div>
                 </div>
             {% endif %}
             <div class="row posts-entry">
                 <div class="col-lg-8">
 
-                    {% for post in posts %}
+                    {% for post in results %}
                         <div class="blog-entry d-flex blog-entry-search-item">
                             <a href="{{ post.get_absolute_url }}" class="img-link me-4">
                                 <img src="{% thumbnail post.image 215x215 quality=100%}" alt="{{ post.title }}" class="img-fluid" style="width: 215px; height: 215px;">
@@ -31,6 +37,8 @@
                                         More</a></p>
                             </div>
                         </div>
+                    {% empty %}
+                        <p>There are no posts for your search.</p>
                     {% endfor %}
 
                     {% with page=page_obj %}

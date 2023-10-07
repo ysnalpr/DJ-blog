@@ -1,4 +1,5 @@
 from django.contrib import admin
+from mptt.admin import MPTTModelAdmin
 from .models import Post, Category
 
 
@@ -13,9 +14,16 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ["status", "publish"]
 
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ["name", "slug", "parent"]
-    list_filter = ["parent"]
-    search_fields = ["name"]
-    prepopulated_fields = {"slug": ("name",)}
+admin.site.register(
+    Category,
+    MPTTModelAdmin,
+    list_display=["name"],
+)
+
+# @admin.register(Category)
+# class CategoryAdmin(DraggableMPTTAdmin):
+#     list_display = ["name", "slug", "parent"]
+#     list_display_links = ["name"]
+#     list_filter = ["parent"]
+#     search_fields = ["name"]
+#     prepopulated_fields = {"slug": ("name",)}

@@ -7,6 +7,8 @@ from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.text import slugify
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 
 def content_file_name(instance, filename):  # To change the image name
@@ -45,6 +47,7 @@ class Post(models.Model):
     status = models.CharField(
         max_length=2, choices=Status.choices, default=Status.DRAFT
     )
+    comments = GenericRelation(Comment)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -96,7 +99,7 @@ class Category(MPTTModel):
         while k is not None:
             full_path.append(k.name)
             k = k.parent
-        return "->".join(full_path[::-1])
+        return " > ".join(full_path[::-1])
 
     def get_absolute_url(self):
         return reverse("post:post_list_by_category", args=[self.slug])

@@ -30,14 +30,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "django.contrib.postgres",
     "post.apps.PostConfig",
     "ckeditor",
     "ckeditor_uploader",
     "taggit",
     "mptt",
     "easy_thumbnails",
-    "django_comments_xtd",
-    "django_comments",
+    "comment",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +51,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "blog.urls"
+
+LOGIN_URL = "login"
 
 TEMPLATES = [
     {
@@ -226,6 +228,14 @@ CKEDITOR_CONFIGS = {
 # End Ckeditor settings
 
 # Comments
-COMMENTS_APP = "django_comments_xtd"
-COMMENTS_XTD_MAX_THREAD_LEVEL = 2
-COMMENTS_XTD_CONFIRM_EMAIL = True
+COMMENT_PER_PAGE = None
+COMMENT_FLAGS_ALLOWED = 10
+COMMENT_ALLOW_ANONYMOUS = True
+COMMENT_FROM_EMAIL = "no-reply@email.com"
+COMMENT_USE_EMAIL_FIRST_PART_AS_USERNAME = True
+COMMENT_USE_GRAVATAR = True
+COMMENT_ALLOW_SUBSCRIPTION = True
+
+MANAGERS = (("Yasin Alipour", "yasinalipour@example.com"),)
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+MPTT_ADMIN_LEVEL_INDENT = 20

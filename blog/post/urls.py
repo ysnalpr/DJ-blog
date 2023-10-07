@@ -15,4 +15,5 @@ urlpatterns = [
         views.PostDetailView.as_view(),
         name="post_detail",
     ),
+    path("search/", views.SearchView.as_view(), name="post_search"),
 ]
