@@ -53,10 +53,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "blog.urls"
 
-LOGIN_REDIRECT_URL = "account:profile"
+LOGIN_REDIRECT_URL = "account:dashboard"
 LOGIN_URL = "account:login"
 LOGOUT_URL = "account:logout"
-
 
 TEMPLATES = [
     {
