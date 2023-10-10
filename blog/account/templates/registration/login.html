@@ -13,8 +13,7 @@
                 <div class="card-body">
                   <a href="{% url 'post:post_list' %}"
                     class="text-nowrap logo-img text-center d-block py-3 w-100">
-                    <img src="{% static 'account/images/logos/dark-logo.svg' %}" width="180"
-                      alt>
+                      <h1 class="text-primary"><strong>Blogy</strong></h1>
                   </a>
                   <p class="text-center">Login</p>
                   <form method="post" action="{% url 'account:login' %}">
@@ -49,9 +48,9 @@
                     <input type="submit" value="Login" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">
                     <div
                       class="d-flex align-items-center justify-content-center">
-                      <p class="fs-4 mb-0 fw-bold">New to Modernize?</p>
+                      <p class="fs-4 mb-0 fw-bold">New to Blogy?</p>
                       <a class="text-primary fw-bold ms-2"
-                        href="./authentication-register.html">Create an account</a>
+                        href="{% url 'account:register' %}">Create an account</a>
                     </div>
                   </form>
                 </div>

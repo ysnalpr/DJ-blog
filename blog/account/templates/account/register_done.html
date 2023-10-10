@@ -1,0 +1,22 @@
+{% extends 'acc_base.html' %}
+
+{% block title %}Register Done{% endblock %}
+
+{% block content %}
+    <div
+        class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <div class="row justify-content-center w-100">
+            <div class="col-md-8 col-lg-6 col-xxl-3">
+              <div class="card mb-0">
+                <div class="card-body">
+                    <h2 class="text-center mb-5">Welcome "{{ new_user.first_name|default:new_user.username }}"</h2>
+                    <p class="text-center">Your account has been successfully created</p>
+                    <p><a href="{% url "account:login" %}" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Login now</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+{% endblock %}
