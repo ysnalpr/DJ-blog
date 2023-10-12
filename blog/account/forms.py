@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
+from .models import Profile
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -32,7 +33,34 @@ class UserRegistrationForm(forms.ModelForm):
             "outlook.com",
         ]
         cd = self.cleaned_data
+        email = cd["email"]
         domain = cd["email"].split("@")[-1]
-        if domain not in valid_domains:
-            raise forms.ValidationError("Enter a valid email")
-        return cd["email"]
+        if domain not in valid_domains or User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Email already in use or does not valid.")
+        return email
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "email"]
+
+    def clean_email(self):
+        cd = self.cleaned_data
+        email = cd["email"]
+        qs = User.objects.exclude(id=self.instance.id).filter(email=email)
+        if qs.exists():
+            raise forms.ValidationError("Email already in use.")
+        return email
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["image", "date_of_birth", "phone_number"]
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data["phone_number"]
+        if len(phone_number) != 11:
+            raise forms.ValidationError("Enter a valid phone number")
+        return self.cleaned_data["phone_number"]

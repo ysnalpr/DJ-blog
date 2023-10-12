@@ -48,5 +48,6 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     # dashboard
+    path("edit/", views.edit, name="edit"),
     path("", views.dashboard, name="dashboard"),
 ]

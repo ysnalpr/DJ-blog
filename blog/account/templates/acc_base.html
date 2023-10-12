@@ -18,6 +18,13 @@
             data-sidebar-position="fixed" data-header-position="fixed">
             {% block sidebar %}{% endblock %}
             <div class="container-fluid">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}" role="alert">
+                            {{ message|safe }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 {% block content %} {% endblock %}
             </div>
         </div>

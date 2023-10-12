@@ -87,12 +87,12 @@
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link"
-                        href="{% url 'account:logout' %}"
+                        href="{% url 'account:edit' %}"
                         aria-expanded="false">
                         <span>
-                            <i class="ti ti-login"></i>
+                            <i class="ti ti-settings"></i>
                         </span>
-                        <span class="hide-menu">Logout</span>
+                        <span class="hide-menu">Edit account</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -113,6 +113,16 @@
                             <i class="ti ti-lock"></i>
                         </span>
                         <span class="hide-menu">Reset Password</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link"
+                        href="{% url 'account:logout' %}"
+                        aria-expanded="false">
+                        <span>
+                            <i class="ti ti-login"></i>
+                        </span>
+                        <span class="hide-menu">Logout</span>
                     </a>
                 </li>
             </ul>

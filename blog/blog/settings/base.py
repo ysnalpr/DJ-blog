@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "mptt",
     "easy_thumbnails",
     "comment",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -233,8 +235,6 @@ CKEDITOR_CONFIGS = {
 # Comments
 COMMENT_PER_PAGE = None
 COMMENT_FLAGS_ALLOWED = 10
-COMMENT_ALLOW_ANONYMOUS = True
-COMMENT_FROM_EMAIL = "no-reply@email.com"
 COMMENT_USE_EMAIL_FIRST_PART_AS_USERNAME = True
 COMMENT_USE_GRAVATAR = True
 COMMENT_ALLOW_SUBSCRIPTION = True
@@ -251,3 +251,12 @@ EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
 
 # mptt model setting
 MPTT_ADMIN_LEVEL_INDENT = 20
+
+# Crispy forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "account.authentication.EmailAuthBackend",
+]
