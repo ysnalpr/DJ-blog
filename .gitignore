@@ -85,3 +85,4 @@ cython_debug/
 .idea
 migrations/
 uploads/
+*.sql
