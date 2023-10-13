@@ -1,14 +1,7 @@
 {% load comment_tags %}
 {% load i18n %}
 
-<div id="{{ comment.urlhash }}" class="js-updated-comment {% if comment.has_flagged_state %}flagged-comment {% endif %}{% block content_wrapper_cls %}{% if has_valid_profile %}col-9 col-md-10{% else %}co-11 mx-3{% endif %}{% endblock content_wrapper_cls %}" >
-    {% block comment_content %}
-        {% if render_markdown %}
-            {% render_content comment markdown=True %}
-        {% else %}
-            {% render_content comment markdown=False %}
-        {% endif %}
-    {% endblock comment_content %}
+<div id="{{ comment.urlhash }}" class="js-updated-comment {% if comment.has_flagged_state %}flagged-comment {% endif %}{% block content_wrapper_cls %}{% if has_valid_profile %}col-9 col-md-9{% else %}co-11 mx-3{% endif %}{% endblock content_wrapper_cls %}" >
     {% get_username_for_comment comment as username %}
     <div class="{% block footer_wrapper_cls %}mt-2 text-muted{% endblock footer_wrapper_cls %}">
         <small>
@@ -37,6 +30,7 @@
                     {% endif %}
                 {% endif %}
             {% endif %}
+
             {% if user|can_block_users %}
                 {% include 'comment/block/block_icon.html' %}
             {% endif %}
@@ -52,7 +46,17 @@
                     </div>
                 {% endif %}
             {% endif %}
+
         </small>
+        <p>
+            {% block comment_content %}
+                {% if render_markdown %}
+                    {% render_content comment markdown=True %}
+                {% else %}
+                    {% render_content comment markdown=False %}
+                {% endif %}
+            {% endblock comment_content %}
+        </p>
         {% include "comment/reactions/reactions.html" with comment=comment %}
     </div>
 </div>

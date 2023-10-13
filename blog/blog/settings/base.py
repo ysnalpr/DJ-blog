@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = "blog.urls"
 
 LOGIN_REDIRECT_URL = "account:dashboard"
-LOGIN_URL = "account:login"
+LOGIN_URL = "account/login"
 LOGOUT_URL = "account:logout"
 
 TEMPLATES = [
@@ -233,12 +233,12 @@ CKEDITOR_CONFIGS = {
 # End Ckeditor settings
 
 # Comments
-COMMENT_PER_PAGE = None
 COMMENT_FLAGS_ALLOWED = 10
 COMMENT_USE_EMAIL_FIRST_PART_AS_USERNAME = True
 COMMENT_USE_GRAVATAR = True
-COMMENT_ALLOW_SUBSCRIPTION = True
-
+COMMENT_ALLOW_SUBSCRIPTION = False
+PROFILE_APP_NAME = "account"
+PROFILE_MODEL_NAME = "Profile"
 ADMINS = (("Yasin Alipour", "yasinalipour@example.com"),)
 
 # Email server config

@@ -6,7 +6,9 @@
         {% for comment in replies %}
             {% include 'comment/comments/child_comment.html' %}
         {% endfor %}
-        {% include 'comment/comments/create_comment.html' with placeholder=placeholder %}
+        <div style="margin-left: 60px;">
+            {% include 'comment/comments/create_comment.html' with placeholder=placeholder %}
+        </div>
     </div>
     <hr/>
 </div>
