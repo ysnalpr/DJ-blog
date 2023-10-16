@@ -18,6 +18,12 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.sitemaps.views import sitemap
+from post.sitemaps import PostSitemap
+
+sitemaps = {
+    "posts": PostSitemap,
+}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,6 +31,12 @@ urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("comment/", include("comment.urls")),
     #
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
     path("account/", include("account.urls", namespace="account")),
     path("", include("post.urls", namespace="post")),
 ]

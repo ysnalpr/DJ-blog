@@ -116,12 +116,12 @@
 						<div class="widget">
 							<h3>Social</h3>
 							<ul class="list-unstyled social">
-								<li><a href="#"><span class="icon-instagram"></span></a></li>
-								<li><a href="#"><span class="icon-twitter"></span></a></li>
-								<li><a href="#"><span class="icon-facebook"></span></a></li>
-								<li><a href="#"><span class="icon-linkedin"></span></a></li>
-								<li><a href="#"><span class="icon-pinterest"></span></a></li>
-								<li><a href="#"><span class="icon-dribbble"></span></a></li>
+								<li><a href="https://www.instagram.com/"><span class="icon-instagram"></span></a></li>
+								<li><a href="https://twitter.com"><span class="icon-twitter"></span></a></li>
+								<li><a href="https://www.facebook.com/"><span class="icon-facebook"></span></a></li>
+								<li><a href="https://www.linkedin.com"><span class="icon-linkedin"></span></a></li>
+								<li><a href="https://www.pinterest.com/"><span class="icon-pinterest"></span></a></li>
+								<li><a href="https://dribbble.com/"><span class="icon-dribbble"></span></a></li>
 							</ul>
 						</div> <!-- /.widget -->
 					</div> <!-- /.col-lg-4 -->
@@ -129,20 +129,8 @@
 						<div class="widget">
 							<h3 class="mb-4">Company</h3>
 							<ul class="list-unstyled float-start links">
-								<li><a href="#">About us</a></li>
-								<li><a href="#">Services</a></li>
-								<li><a href="#">Vision</a></li>
-								<li><a href="#">Mission</a></li>
-								<li><a href="#">Terms</a></li>
-								<li><a href="#">Privacy</a></li>
-							</ul>
-							<ul class="list-unstyled float-start links">
-								<li><a href="#">Partners</a></li>
-								<li><a href="#">Business</a></li>
-								<li><a href="#">Careers</a></li>
-								<li><a href="#">Blog</a></li>
-								<li><a href="#">FAQ</a></li>
-								<li><a href="#">Creative</a></li>
+								<li><a href="{% url 'django.contrib.sitemaps.views.sitemap' %}">Sitemap</a></li>
+								<li><a href="{% url 'post:post_feed' %}">RSS Feed</a></li>
 							</ul>
 						</div> <!-- /.widget -->
 					</div> <!-- /.col-lg-4 -->
