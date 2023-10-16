@@ -16,6 +16,7 @@ To run the project in development mode; Just use steps below:
   git clone https://github.com/ysnalpr/DJ-blog.git && cd DJ-blog
   virtualenv -p python3 env  # Create virtualenv named env
   source env/bin/activate
+  cd blog
   pip install -r requirements.txt
   mv .env-sample .env # Write your own project detail in .env file
   python3 manage.py makemigrations
@@ -35,6 +36,7 @@ If You're On A Windows Machine , Make Environment Ready By Following Steps Below
   cd DJ-blog
   virutalenv env
   env\Scripts\activate # Activate The Virutal Environment
+  cd blog
   pip install -r requirements.txt
   mv .env-sample .env # Write your own project detail in .env file
   python manage.py makemigrations
