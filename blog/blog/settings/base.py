@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.postgres",
+    "django.forms",
     "post.apps.PostConfig",
     "ckeditor",
     "ckeditor_uploader",
@@ -63,7 +64,9 @@ LOGOUT_URL = "account:logout"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -137,7 +140,8 @@ CKEDITOR_IMAGE_BACKEND = "ckeditor_uploader.backends.PillowBackend"
 CKEDITOR_THUMBNAIL_SIZE = (300, 300)
 CKEDITOR_IMAGE_QUALITY = 40
 CKEDITOR_BROWSE_SHOW_DIRS = True
-CKEDITOR_ALLOW_NONIMAGE_FILES = True
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 CUSTOM_TOOLBAR = [
     {

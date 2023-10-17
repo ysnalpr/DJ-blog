@@ -1,0 +1,44 @@
+{% extends 'acc_base.html' %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if object %}
+	    Edit post "{{ object.title }}"
+    {% else %}
+        Create new post
+    {% endif %}
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'account/_sidebar.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">
+                        {% if object %}
+                            Edit post "{{ object.title }}"
+                        {% else %}
+                            Create new post
+                        {% endif %}
+                    </h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.media }}
+                                {{ form|crispy }}
+                                <input type="submit" class="btn btn-primary" value="Save post">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

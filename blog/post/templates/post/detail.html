@@ -8,14 +8,14 @@
 
 {% block content %}
     <div class="site-cover site-cover-sm same-height overlay single-page"
-      style="background-image: url('{% thumbnail post.image 215x215 quality=100%}');">
+      style="background-image: url('{% thumbnail post.image 215x215 quality=100 %}');">
       <div class="container">
         <div class="row same-height justify-content-center">
           <div class="col-md-6">
             <div class="post-entry text-center">
               <h1 class="mb-4">{{ post.title }}</h1>
               <div class="post-meta align-items-center text-center">
-                <figure class="author-figure mb-0 me-3 d-inline-block"><img src="{% static 'images/person_1.jpg' %}" alt="{{ post.title }}" class="img-fluid"></figure>
+                <figure class="author-figure mb-0 me-3 d-inline-block"><img src="{% thumbnail post.author.profile.image 50x50 quality=100 %}" alt="{{ post.author.image.url }}" class="img-fluid w-100"></figure>
                 <span class="d-inline-block mt-1">By {{ post.author }}</span>
                 <span>&nbsp;-&nbsp; {{ post.publish|date }} | {{ post.publish|time }} | <a href="{{ absolute_url }}" target="_blank"><i class="ri-link text-white"></i></a></span>
               </div>
@@ -38,11 +38,8 @@
 
             <div class="pt-5">
               <p>
-                  Category: <a href="#">{{ post.category }}</a>
-                  Tags:
-                  {% for tag in post.tags.all %}
-                      <a href="#">#{{ tag }}</a>
-                  {% endfor %}
+                  Category: <a href="{% url 'post:post_list_by_category' post.category.slug %}">{{ post.category }}</a>
+                  Tags: {{ post.tags.all|join:', ' }}
               </p>
             </div>
 
@@ -56,27 +53,17 @@
           <!-- END main-content -->
 
           <div class="col-md-12 col-lg-4 sidebar">
-            <div class="sidebar-box search-form-wrap">
-              <form action="#" class="sidebar-search-form">
-                <span class="bi-search"></span>
-                <input type="text" class="form-control" id="s"
-                  placeholder="Type a keyword and hit enter">
-              </form>
-            </div>
             <!-- END sidebar-box -->
             <div class="sidebar-box">
               <div class="bio text-center">
-                <img src="{% static 'images/person_2.jpg' %}" alt="Image Placeholder"
-                  class="img-fluid mb-3">
+                <img src="{{ post.author.profile.image.url }}" alt="{{ post.author.username }}" style="height: 125px;"
+                  class="img-fluid mb-3 w-100">
                 <div class="bio-body">
-                  <h2>Hannah Anderson</h2>
+                  <h2>{{ post.author.get_full_name|default:post.author.username }}</h2>
                   <p class="mb-4">Lorem ipsum dolor sit amet, consectetur
                     adipisicing elit. Exercitationem facilis sunt repellendus
                     excepturi beatae porro debitis voluptate nulla quo veniam
                     fuga sit molestias minus.</p>
-                  <p><a href="#"
-                      class="btn btn-primary btn-sm rounded px-2 py-2">Read my
-                      bio</a></p>
                   <p class="social">
                     <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
                     <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>

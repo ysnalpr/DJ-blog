@@ -47,7 +47,12 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+    # user posts urls
+    path("post/mine/", views.AuthorPostListView.as_view(), name="author_post_list"),
+    path("post/create/", views.PostCreateView.as_view(), name="post_create"),
+    path("post/<pk>/update/", views.PostUpdateView.as_view(), name="post_edit"),
+    path("post/<pk>/delete/", views.PostDeleteView.as_view(), name="post_delete"),
     # dashboard
     path("edit/", views.edit, name="edit"),
-    path("", views.dashboard, name="dashboard"),
+    path("", views.Dashboard.as_view(), name="dashboard"),
 ]

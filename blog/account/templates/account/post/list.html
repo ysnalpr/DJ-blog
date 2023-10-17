@@ -1,0 +1,44 @@
+{% extends 'acc_base.html' %}
+{% load thumbnail %}
+
+{% block title %}My posts{% endblock %}
+
+{% block sidebar %}
+    {% include 'account/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <h1 class="card-title fw-semibold">Posts</h1>
+                        </div>
+                        <div class="col-6">
+                            <a href="{% url 'account:post_create' %}" class="btn btn-primary float-end">Create new post</a>
+                        </div>
+                    </div>
+                    {% for post in object_list %}
+                    	<div class="col-md-4">
+                            <div class="card">
+                                <img
+                                    src="{% thumbnail post.image 200x200 quality=100 %}"
+                                    class="card-img-top" alt="{{ post.title }}">
+                                <div class="card-body">
+                                    <h6 class="card-title"><small>{{ post.title|truncatechars:30 }}</small></h6>
+                                    <a href="{% url 'account:post_edit' post.id %}" class="btn btn-secondary">Edit</a>
+                                    <a href="{% url 'account:post_delete' post.id %}" class="btn btn-danger">Delete</a>
+                                    <a href="{{ post.get_absolute_url }}" class="btn btn-outline-dark" target="_blank">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>You don't have any posts yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
