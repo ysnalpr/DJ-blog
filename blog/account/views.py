@@ -13,9 +13,16 @@ from .models import Profile
 from post.models import Post
 
 
-class Dashboard(View, LoginRequiredMixin):
+class Dashboard(LoginRequiredMixin, View):
     def get(self, request):
-        return render(request, "account/dashboard.html")
+        latest_posts = Post.objects.filter(author=self.request.user)[:3]
+        print(latest_posts)
+        posts_count = Post.objects.filter(author=self.request.user).count()
+        return render(
+            request,
+            "account/dashboard.html",
+            {"latest_posts": latest_posts, "posts_count": posts_count},
+        )
 
 
 class AuthorMixin:
@@ -44,22 +51,22 @@ class AuthorPostEditMixin(AuthorPostMixin, AuthorEditMixin):
 
 class AuthorPostListView(AuthorPostMixin, ListView):
     template_name = "account/post/list.html"
-    permission_required = "posts.view_post"
+    permission_required = "post.view_post"
 
 
 class PostCreateView(AuthorPostEditMixin, CreateView):
-    permission_required = "posts.add_post"
+    permission_required = "post.add_post"
     success_message = "Post successfully created."
 
 
 class PostUpdateView(AuthorPostEditMixin, UpdateView):
-    permission_required = "posts.change_post"
+    permission_required = "post.change_post"
     success_message = "Post successfully edited."
 
 
 class PostDeleteView(AuthorPostMixin, DeleteView):
     template_name = "account/post/delete.html"
-    permission_required = "posts.delete_post"
+    permission_required = "post.delete_post"
     success_message = "Post successfully deleted."
 
 

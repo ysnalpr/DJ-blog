@@ -31,6 +31,15 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="{% url 'post:post_list' %}"
+                        aria-expanded="false">
+                        <span>
+                            <i class="ti ti-smart-home"></i>
+                        </span>
+                        <span class="hide-menu">View Blog</span>
+                    </a>
+                </li>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                     <span class="hide-menu">My posts</span>
@@ -125,6 +134,7 @@
                 id="navbarNav">
                 <ul
                     class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                    <span class="btn btn-primary">Hello {{ request.user.first_name|default:request.user.username }}</span>
                     <li class="nav-item dropdown">
                         <a class="nav-link nav-icon-hover"
                             href="javascript:void(0)" id="drop2"
@@ -144,12 +154,12 @@
                                     <i class="ti ti-user fs-6"></i>
                                     <p class="mb-0 fs-3">{{ request.user.first_name|default:request.user.username }}</p>
                                 </a>
-                                <a href="javascript:void(0)"
+                                <a href="{% url 'account:edit' %}"
                                     class="d-flex align-items-center gap-2 dropdown-item">
                                     <i class="ti ti-mail fs-6"></i>
                                     <p class="mb-0 fs-3">My Account</p>
                                 </a>
-                                <a href="javascript:void(0)"
+                                <a href="{% url 'account:author_post_list' %}"
                                     class="d-flex align-items-center gap-2 dropdown-item">
                                     <i class="ti ti-list-check fs-6"></i>
                                     <p class="mb-0 fs-3">My Posts</p>

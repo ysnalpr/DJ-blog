@@ -27,10 +27,11 @@
                                     src="{% thumbnail post.image 200x200 quality=100 %}"
                                     class="card-img-top" alt="{{ post.title }}">
                                 <div class="card-body">
-                                    <h6 class="card-title"><small>{{ post.title|truncatechars:30 }}</small></h6>
+                                    <h6 class="card-title"><small style="margin-right: 15px;">{{ post.title|truncatechars:30 }}</small>{% if post.status == 'DF' %}<span class="btn btn-warning btn-sm">Draft</span>{% else %}<span class="btn btn-primary btn-sm">Published</span>{% endif %}</h6>
+                                    <h6 class="card-subtitle mb-3 text-muted">{{ post.comments.count }} Comment{{ post.comments.count|pluralize }}</h6>
                                     <a href="{% url 'account:post_edit' post.id %}" class="btn btn-secondary">Edit</a>
                                     <a href="{% url 'account:post_delete' post.id %}" class="btn btn-danger">Delete</a>
-                                    <a href="{{ post.get_absolute_url }}" class="btn btn-outline-dark" target="_blank">View</a>
+                                    {% if post.status == 'PB' %}<a href="{{ post.get_absolute_url }}" class="btn btn-outline-dark" target="_blank">View</a>{% endif %}
                                 </div>
                             </div>
                         </div>
