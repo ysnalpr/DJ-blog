@@ -29,6 +29,8 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     template_name = "post/detail.html"
 
+    # def get_queryset(self):
+
     def get_object(self):
         slug = self.kwargs.get("slug")
         year = self.kwargs.get("year")
@@ -42,11 +44,21 @@ class PostDetailView(DetailView):
             publish__month=month,
             publish__day=day,
         )
+
+        # similar posts
+        post_tags_ids = post.tags.values_list("id", flat=True)
+        global similar_posts
+        similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(
+            id=post.id
+        )
+        similar_posts = similar_posts.annotate(same_tags=Count("tags")).order_by(
+            "-same_tags", "-publish"
+        )[:4]
         return post
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context["categories"] = Category.objects.all()
+        context["similar_posts"] = similar_posts
         context["absolute_url"] = self.request.build_absolute_uri()
         return context
 

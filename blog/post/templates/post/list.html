@@ -2,6 +2,7 @@
 {% load static %}
 {% load mptt_tags %}
 {% load thumbnail %}
+{% load blog_tags %}
 
 {% block title %}{% if category %}{{ category.name }}{% else %}All Posts{% endif %}{% endblock %}
 
@@ -21,7 +22,7 @@
                     {% for post in posts %}
                         <div class="blog-entry d-flex blog-entry-search-item">
                             <a href="{{ post.get_absolute_url }}" class="img-link me-4">
-                                <img src="{% thumbnail post.image 215x215 quality=100%}" alt="{{ post.title }}" class="img-fluid" style="width: 215px; height: 215px;">
+                                <img src="{% thumbnail post.image 215x215 quality=100%}" alt="{{ post.title }}" class="img-fluid" style="width: 150px; height: 150px;">
                             </a>
                             <div>
                                 <span class="date">{{ post.publish|date }} | {{ post.publish|time }} &bullet; <span>written by {{ post.author }}</span> | <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></span>
@@ -56,46 +57,9 @@
                 <div class="col-lg-4 sidebar">
                     <!-- END sidebar-box -->
                     <div class="sidebar-box">
-                        <h3 class="heading">Popular Posts</h3>
+                        <h3 class="heading">Latest Posts</h3>
                         <div class="post-entry-sidebar">
-                            <ul>
-                                <li>
-                                    <a href>
-                                        <img src="images/img_1_sq.jpg" alt="Image placeholder"
-                                            class="me-4 rounded">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href>
-                                        <img src="images/img_2_sq.jpg" alt="Image placeholder"
-                                            class="me-4 rounded">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href>
-                                        <img src="images/img_3_sq.jpg" alt="Image placeholder"
-                                            class="me-4 rounded">
-                                        <div class="text">
-                                            <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                                            <div class="post-meta">
-                                                <span class="mr-2">March 15, 2018 </span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
+                            {% show_latest_post 4 %}
                         </div>
                     </div>
                     <!-- END sidebar-box -->

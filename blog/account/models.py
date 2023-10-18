@@ -16,8 +16,8 @@ class Profile(models.Model):
     date_of_birth = models.DateField(
         blank=True, null=True, help_text="Format: '0000-00-00 | yyyy-mm-dd'"
     )
-    phone_number = models.CharField(
-        max_length=11, blank=True, null=True, help_text="Format: 09112223344"
+    bio = models.CharField(
+        max_length=200, blank=True, null=True, help_text="Max length: 200 char"
     )
 
     def __str__(self):

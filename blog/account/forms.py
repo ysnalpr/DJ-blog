@@ -57,10 +57,4 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ["image", "date_of_birth", "phone_number"]
-
-    def clean_phone_number(self):
-        phone_number = self.cleaned_data["phone_number"]
-        if len(phone_number) != 11:
-            raise forms.ValidationError("Enter a valid phone number")
-        return self.cleaned_data["phone_number"]
+        fields = ["image", "date_of_birth", "bio"]

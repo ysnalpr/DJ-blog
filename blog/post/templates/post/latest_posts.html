@@ -1,0 +1,17 @@
+{% load thumbnail %}
+<ul>
+    {% for post in latest_post %}
+    <li>
+        <a href="{{ post.get_absolute_url }}" target="_blank">
+            <img src="{% thumbnail post.image 150x150 quality=100 %}" alt="{{ post.title }}"
+                class="me-4 rounded">
+            <div class="text">
+                <h4>{{ post.title }}</h4>
+                <div class="post-meta">
+                    <span class="mr-2">{{ post.publish }}</span>
+                </div>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>

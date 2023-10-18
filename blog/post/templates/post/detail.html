@@ -39,7 +39,7 @@
             <div class="pt-5">
               <p>
                   Category: <a href="{% url 'post:post_list_by_category' post.category.slug %}">{{ post.category }}</a>
-                  Tags: {{ post.tags.all|join:', ' }}
+                  Tags: <span class="text-dark">{{ post.tags.all|join:', ' }}</span>
               </p>
             </div>
 
@@ -60,63 +60,33 @@
                   class="img-fluid mb-3 w-100">
                 <div class="bio-body">
                   <h2>{{ post.author.get_full_name|default:post.author.username }}</h2>
-                  <p class="mb-4">Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit. Exercitationem facilis sunt repellendus
-                    excepturi beatae porro debitis voluptate nulla quo veniam
-                    fuga sit molestias minus.</p>
-                  <p class="social">
-                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
-                  </p>
+                  <p class="mb-4">{{ post.author.profile.bio }}</p>
                 </div>
               </div>
             </div>
             <!-- END sidebar-box -->
             <div class="sidebar-box">
-              <h3 class="heading">Popular Posts</h3>
+              <h3 class="heading">Similar Posts</h3>
               <div class="post-entry-sidebar">
                 <ul>
-                  <li>
-                    <a href>
-                      <img src="{% static 'images/img_1_sq.jpg' %}" alt="Image placeholder"
-                        class="me-4 rounded">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and
-                          Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href>
-                      <img src="{% static 'images/img_2_sq.jpg' %}" alt="Image placeholder"
-                        class="me-4 rounded">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and
-                          Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href>
-                      <img src="{% static 'images/img_3_sq.jpg' %}" alt="Image placeholder"
-                        class="me-4 rounded">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and
-                          Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
+                    {% for post in similar_posts %}
+                    	<li>
+                            <a href="{{ post.get_absolute_url }}" target="_blank">
+                                  <img src="{% thumbnail post.image 150x150 quality=100 %}" alt="{{ post.title }}"
+                                    class="me-4 rounded">
+                                  <div class="text">
+                                        <h4>{{ post.title }}</h4>
+                                        <div class="post-meta">
+                                            <span class="mr-2">{{ post.publish }}</span>
+                                        </div>
+                                  </div>
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li>
+                            <p>There are no similar posts yet.</p>
+                        </li>
+                    {% endfor %}
                 </ul>
               </div>
             </div>
